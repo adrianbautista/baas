@@ -1,0 +1,5 @@
+{
+	"ImportPath": "baas",
+	"GoVersion": "go1.3.1",
+	"Deps": []
+}
