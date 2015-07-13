@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -14,8 +15,7 @@ func main() {
 		data := booleanGenerator()
 		json.NewEncoder(w).Encode(map[string]bool{"data": data})
 	})
-
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
 
 func booleanGenerator() bool {
