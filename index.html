@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+  <h1 id="the-bomb"></h1>
+  <script>
+    $(function() {
+      $.get(
+        "//booson.herokuapp.com",
+        function(response) {
+          response.data ? $('#the-bomb').text(response.data) : console.log('error: ', response)
+        }
+      )
+    }
+  </script>
+</body>
+</html>
