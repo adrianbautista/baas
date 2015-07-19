@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	// "fmt"
-	// "html"
+	"fmt"
+	"github.com/rs/cors"
 	"log"
 	"math/rand"
 	"net/http"
@@ -11,15 +11,31 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		data := booleanGenerator()
-		json.NewEncoder(w).Encode(map[string]bool{"data": data})
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
 	})
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
+
+	handler := http.HandlerFunc(httpHandler)
+	log.Fatal(http.ListenAndServe(getPort(), c.Handler(handler)))
+}
+
+func httpHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	data := booleanGenerator()
+	json.NewEncoder(w).Encode(map[string]bool{"data": data})
 }
 
 func booleanGenerator() bool {
 	booleans := [2]bool{true, false}
 	index := rand.Intn(2)
 	return booleans[index]
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }

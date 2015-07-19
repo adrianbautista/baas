@@ -1,5 +1,10 @@
 {
 	"ImportPath": "baas",
 	"GoVersion": "go1.3.1",
-	"Deps": []
+	"Deps": [
+		{
+			"ImportPath": "github.com/rs/cors",
+			"Rev": "e3d1862a4bc15e474edd22093665cad54e89adb4"
+		}
+	]
 }
