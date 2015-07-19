@@ -2,19 +2,20 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
   <h1 id="the-bomb"></h1>
   <script>
     $(function() {
-      $.get(
-        "//booson.herokuapp.com",
-        function(response) {
-          response.data ? $('#the-bomb').text(response.data) : console.log('error: ', response)
-        }
-      )
-    }
+      $.ajax({
+        url: "https://booson.herokuapp.com",
+        success: function(response, textStatus, xhr) {
+          xhr.status === 200 ? $('#the-bomb').text(response.data) : console.log('error: ', response);
+        },
+        dataType: "json"
+      });
+    });
   </script>
 </body>
 </html>
