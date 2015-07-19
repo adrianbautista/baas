@@ -1,9 +1,9 @@
 package main
 
 import (
+	"baas/Godeps/_workspace/src/github.com/rs/cors"
 	"encoding/json"
 	"fmt"
-	"github.com/rs/cors"
 	"log"
 	"math/rand"
 	"net/http"
